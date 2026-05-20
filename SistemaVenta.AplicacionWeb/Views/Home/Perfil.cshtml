@@ -1,0 +1,125 @@
+﻿@model SistemaVenta.AplicacionWeb.Models.ViewModels.VMUsuario
+@{
+    ViewData["Title"] = "Perfil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["MensajeClave"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["MensajeClave"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+@if (TempData["ErrorClave"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorClave"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 bg-second-primary">
+                <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-user"></i> Mis Datos</h6>
+            </div>
+            <div class="card-body">
+                <form asp-action="GuardarPerfil" asp-controller="Home" method="post" enctype="multipart/form-data">
+                    
+                    <div class="form-row justify-content-center">
+                        <div class="form-group col-sm-12 text-center">
+                            @if (!string.IsNullOrEmpty(Model.UrlFoto))
+                            {
+                                <img id="imgFoto" src="@Model.UrlFoto" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                            }
+                            else
+                            {
+                                <img id="imgFoto" src="https://via.placeholder.com/150" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="form-row mb-3">
+                        <div class="col-sm-12 text-center">
+                            <input type="file" name="foto" class="form-control-file border" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control form-control-sm" name="Nombre" value="@Model.Nombre" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <label>Correo</label>
+                            <input type="email" class="form-control form-control-sm" value="@Model.Correo" readonly style="background-color: #eaecf4;">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <label>Telefono</label>
+                            <input type="text" class="form-control form-control-sm" name="Telefono" value="@Model.Telefono">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <label>Rol</label>
+                            <input type="text" class="form-control form-control-sm" value="@Model.NombreRol" readonly style="background-color: #eaecf4;">
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-success btn-sm btn-block">Guardar Cambios</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 bg-second-primary">
+                <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-key"></i> Cambiar Contraseña</h6>
+            </div>
+            <div class="card-body">
+                <form asp-action="CambiarClave" asp-controller="Home" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <label>Contraseña Actual</label>
+                            <input type="password" class="form-control form-control-sm" name="claveActual" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <label>Nueva Contraseña</label>
+                            <input type="password" class="form-control form-control-sm" name="claveNueva" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <label>Confirmar Contraseña</label>
+                            <input type="password" class="form-control form-control-sm" name="confirmarClave" required>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-primary btn-sm btn-block">Actualizar Contraseña</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

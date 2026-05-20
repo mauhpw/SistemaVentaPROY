@@ -1,0 +1,224 @@
+﻿@using SistemaVenta.BLL.Interfaces
+@using System.Security.Claims
+@inject IUsuarioService _usuarioServicio
+ 
+@{
+    string nombreUsuario = "Desconocido";
+    string urlFoto = "";
+ 
+    if (User.Identity.IsAuthenticated)
+    {
+       
+        string idUsuario = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+ 
+        if (idUsuario != null)
+        {
+       
+            var usuario = await _usuarioServicio.ObtenerPorId(int.Parse(idUsuario));
+            nombreUsuario = usuario.Nombre;
+            urlFoto = usuario.UrlFoto;
+        }
+    }
+}
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Jaricards - @ViewData["Title"]</title>
+
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link href="~/css/sb-admin-2.css" rel="stylesheet">
+            <link href="~/vendor/toastr/toastr.min.css" rel="stylesheet">
+                <link href="~/vendor/sweetalert/sweetalert.css" rel="stylesheet">
+
+                    @await RenderSectionAsync("Estilos", required: false)
+
+                </head>
+
+                <body id="page-top">
+
+                    <div id="wrapper">
+
+                        <ul class="navbar-nav bg-gradient-orange sidebar sidebar-dark accordion" id="accordionSidebar">
+
+                            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index", "DashBoard")">
+                                <div class="sidebar-brand-icon">
+                                    <img src="~/img/jari.jpg" alt="Logo" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+                                    </div>
+                                    <div class="sidebar-brand-text mx-3">Jaricards</div>
+                                </a>
+
+                                <hr class="sidebar-divider my-0">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","DashBoard")">
+                                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+
+                                @if (User.IsInRole("1"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdministracion">
+                                            <i class="fas fa-fw fa-cog"></i>
+                                            <span>Administración</span>
+                                        </a>
+                                        <div id="collapseAdministracion" class="collapse" data-parent="#accordionSidebar">
+                                            <div class="bg-white py-2 collapse-inner rounded">
+                                                <a class="collapse-item" href="@Url.Action("Index","Usuario")">Usuarios</a>
+                                                <a class="collapse-item" href="@Url.Action("Index","Negocio")">Negocio</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+
+                                @if (User.IsInRole("1") || User.IsInRole("3"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventario">
+                                            <i class="fas fa-fw fa-clipboard-list"></i>
+                                            <span>Inventario</span>
+                                        </a>
+                                        <div id="collapseInventario" class="collapse" data-parent="#accordionSidebar">
+                                            <div class="bg-white py-2 collapse-inner rounded">
+                                                <a class="collapse-item" href="@Url.Action("Index","Categoria")">Categorias</a>
+                                                <a class="collapse-item" href="@Url.Action("Index","Producto")">Productos</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+
+                                <li class="nav-item">
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
+                                        <i class="fas fa-fw fa-tags"></i>
+                                        <span>Ventas</span>
+                                    </a>
+                                    <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
+                                        <div class="bg-white py-2 collapse-inner rounded">
+                                            <a class="collapse-item" href="@Url.Action("NuevaVenta","Venta")">Nueva Venta</a>
+                                            <a class="collapse-item" href="@Url.Action("HistorialVenta","Venta")">Historial Venta</a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                @if (User.IsInRole("1") || User.IsInRole("3"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
+                                            <i class="fas fa-fw fa-chart-area"></i>
+                                            <span>Reportes</span>
+                                        </a>
+                                        <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
+                                            <div class="bg-white py-2 collapse-inner rounded">
+                                                <a class="collapse-item" href="@Url.Action("Index","Reporte")">Reporte de Ventas</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+
+                                <hr class="sidebar-divider">
+
+                                <div class="text-center d-none d-md-inline">
+                                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                                </div>
+
+                            </ul>
+                            <div id="content-wrapper" class="d-flex flex-column">
+
+                                <div id="content">
+
+                                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                                            <i class="fa fa-bars"></i>
+                                        </button>
+
+                                        <ul class="navbar-nav ml-auto">
+
+                                            <div class="topbar-divider d-none d-sm-block"></div>
+
+                                            <li class="nav-item dropdown no-arrow">
+                                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">@nombreUsuario</span>
+
+                                                    @if (urlFoto != "")
+                                                    {
+                                                        <img class="img-profile rounded-circle" src="@urlFoto">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="img-profile rounded-circle" src="https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?w=300">
+                                                    }
+                                                </a>
+
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                                     aria-labelledby="userDropdown">
+                                                    <a class="dropdown-item" href="@Url.Action("Perfil","Home")">
+                                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                        Perfil
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                        Salir
+                                                    </a>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+
+                                    </nav>
+                                    <div class="container-fluid">
+                                        @RenderBody()
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <a class="scroll-to-top rounded" href="#page-top">
+                            <i class="fas fa-angle-up"></i>
+                        </a>
+
+                        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">¿Listo para irte?</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">Selecciona "Salir" si estás listo para cerrar tu sesión actual.</div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                                        <a class="btn btn-primary" href="@Url.Action("Salir", "Acceso")">Salir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script src="~/vendor/jquery/jquery.min.js"></script>
+                        <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                        <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+                        <script src="~/js/sb-admin-2.js"></script>
+                        <script src="~/vendor/toastr/toastr.min.js"></script>
+                        <script src="~/vendor/sweetalert/sweetalert.js"></script>
+                        <script src="~/vendor/loadingoverlay/loadingoverlay.min.js"></script>
+
+                        @await RenderSectionAsync("Scripts", required: false)
+
+                    </body>
+                </html>

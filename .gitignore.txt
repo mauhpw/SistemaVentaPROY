@@ -1,0 +1,15 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.vsidx
+*.vssscc
+
+# Build
+bin/
+obj/
+*.dll
+*.exe
+
+# Paquetes
+packages/
