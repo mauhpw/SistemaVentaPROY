@@ -5,97 +5,72 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Resumen General</h1>
-</div>
+<div class="container-fluid text-center mt-5">
+    <div class="row mb-5 justify-content-center align-items-center">
+        <div class="col-md-3">
+            <img src="~/img/UANL-Logo.png" alt="UANL" class="img-fluid" style="max-height: 140px;" />
+        </div>
+        <div class="col-md-6">
+            <h1 class="h2 mb-0 text-gray-900 font-weight-bold">Universidad Autónoma de Nuevo León</h1>
+            <h2 class="h4 mt-2 text-gray-800 font-weight-bold">Facultad de Ingeniería Mecánica y Eléctrica</h2>
+            <h3 class="h5 mt-2 text-danger font-weight-bold">Ingeniería en Administración de Sistemas</h3>
+        </div>
+        <div class="col-md-3">
+            <img src="~/img/fime-logo.png" alt="FIME" class="img-fluid" style="max-height: 140px;" />
+        </div>
+    </div>
 
-<div class="row">
+    <div class="row mt-5 mb-5">
+        <div class="col-12">
+            <h1 class="display-4 text-danger font-weight-bold">Sistema de Ventas</h1>
+            <h3 class="text-gray-700 font-weight-bold">(Versión México)</h3>
+            <hr class="w-50 mx-auto border-danger" style="border-width: 3px;" />
+        </div>
+    </div>
 
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Ventas Registradas
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">150</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-8">
+            <div class="card shadow mb-4 border-left-danger">
+                <div class="card-header py-3 bg-danger">
+                    <h6 class="m-0 font-weight-bold text-white">Integrantes del Equipo:</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-borderless text-center h5 text-gray-900">
+                            <thead>
+                                <tr class="border-bottom">
+                                    <th>Matrícula</th>
+                                    <th>Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2055242</td>
+                                    <td>Manuel Alejandro Ahumada Barajas</td>
+                                </tr>
+                                <tr>
+                                    <td>2051870</td>
+                                    <td>Arely Stephanie García Zavala</td>
+                                </tr>
+                                <tr>
+                                    <td>2055321</td>
+                                    <td>Mauricio Gael Grajales Galindo</td>
+                                </tr>
+                                <tr>
+                                    <td>2052919</td>
+                                    <td>Rosendo Aguilar Cosme</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Productos
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">45</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-box fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            Categorías
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-tags fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Usuarios
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-users fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
+    <div class="row mt-5">
+        <div class="col-12 text-muted font-weight-bold">
+            <p>Profesor: Ing. Ismael Rodriguez Elizalde <br /> Ismael.rodriguezel@uanl.edu.mx</p>
         </div>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-lg-12 mb-4">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">¡Bienvenido a Jaricards!</h6>
-            </div>
-            <div class="card-body text-center">
-                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                     src="~/img/7drago.jpeg" alt="Imagen de Bienvenida">
-                    <p>Bienvenido al sistema de administración. Desde aquí podrás controlar tu inventario, gestionar usuarios y revisar tus ventas.</p>
-                    <a target="_blank" rel="nofollow" href="@Url.Action("NuevaVenta","Venta")">Crear venta &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </div>

@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos {
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Lista de Clientes (México)</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <button class="btn btn-success" id="btnNuevo">
+                    <i class="fas fa-plus-circle"></i> Nuevo Cliente
+                </button>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>RFC</th>
+                            <th>C.P.</th>
+                            <th>Régimen Fiscal</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="tituloModal">Detalle Cliente</h6>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" value="0" id="txtId">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtNombre">Nombre o Razón Social</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" id="txtNombre" name="Nombre">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtDomicilio">Código Postal (Domicilio Fiscal)</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" id="txtDomicilio" name="Domicilio" maxlength="5">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="cboEstado">Estado</label>
+                                    <select class="form-control form-control-sm" id="cboEstado">
+                                        <option value="1">Activo</option>
+                                        <option value="0">No Activo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtCorreo">Correo Electrónico</label>
+                                    <input type="email" class="form-control form-control-sm input-validar" id="txtCorreo" name="Correo">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtRfc">RFC</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" id="txtRfc" name="RFC" maxlength="13">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="cboRegimenFiscal">Régimen Fiscal</label>
+                                    <select class="form-control form-control-sm" id="cboRegimenFiscal">
+                                        <option value="601">601 - General de Ley Personas Morales</option>
+                                        <option value="612">612 - Personas Físicas con Actividades Empresariales</option>
+                                        <option value="626">626 - Régimen Simplificado de Confianza (RESICO)</option>
+                                        <option value="616">616 - Sin obligaciones fiscales</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-sm" type="button" id="btnGuardar">Guardar</button>
+                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+
+    <script src="~/js/vistas/Cliente_Index.js"></script>
+}

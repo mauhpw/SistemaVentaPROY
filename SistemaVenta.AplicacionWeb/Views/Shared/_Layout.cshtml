@@ -112,13 +112,16 @@
                                 @if (User.IsInRole("1") || User.IsInRole("3"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
-                                            <i class="fas fa-fw fa-chart-area"></i>
-                                            <span>Reportes</span>
+                                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdministration"
+                                           aria-expanded="true" aria-controls="collapseAdministration">
+                                            <i class="fas fa-fw fa-cog"></i>
+                                            <span>Administración</span>
                                         </a>
-                                        <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
+                                        <div id="collapseAdministration" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                                             <div class="bg-white py-2 collapse-inner rounded">
-                                                <a class="collapse-item" href="@Url.Action("Index","Reporte")">Reporte de Ventas</a>
+                                                <a class="collapse-item" href="@Url.Action("Index", "Usuario")">Usuarios</a>
+                                                <a class="collapse-item" href="@Url.Action("Index", "Negocio")">Negocio</a>
+                                                <a class="collapse-item" href="@Url.Action("Index", "Cliente")">Clientes</a>
                                             </div>
                                         </div>
                                     </li>

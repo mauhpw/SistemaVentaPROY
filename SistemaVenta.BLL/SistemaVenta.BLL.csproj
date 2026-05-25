@@ -1,20 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FirebaseAuthentication.net" Version="3.7.2" />
-    <PackageReference Include="FirebaseDatabase.net" Version="5.0.0" />
-    <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
-  </ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="Implementacion\FireBaseService.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SistemaVenta.DAL\SistemaVenta.DAL.csproj" />
-    <ProjectReference Include="..\SistemaVenta.Entity\SistemaVenta.Entity.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SistemaVenta.DAL\SistemaVenta.DAL.csproj" />
+		<ProjectReference Include="..\SistemaVenta.Entity\SistemaVenta.Entity.csproj" />
+	</ItemGroup>
 
 </Project>

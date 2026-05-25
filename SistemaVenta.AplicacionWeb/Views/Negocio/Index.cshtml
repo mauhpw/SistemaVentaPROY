@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Negocio";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,7 +7,7 @@
         <h6 class="m-0 font-weight-bold text-white">Datos del Negocio</h6>
     </div>
     <div class="card-body">
-                            
+
         <div class="row">
             <div class="col-sm-12">
                 <form>
@@ -16,11 +15,11 @@
                         <div class="col-sm-6">
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
-                                    <label for="txtNumeroDocumento">Numero Documento</label>
-                                    <input type="text" class="form-control form-control-sm input-validar" id="txtNumeroDocumento" name="Numero Documento">
+                                    <label for="txtRfc">RFC</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" id="txtRfc" name="RFC" maxlength="13">
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <label for="txtCorreo">Razon Social</label>
+                                    <label for="txtRazonSocial">Razon Social</label>
                                     <input type="text" class="form-control form-control-sm input-validar" id="txtRazonSocial" name="Razon Social">
                                 </div>
                             </div>
@@ -36,12 +35,12 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
-                                    <label for="txTelefono">Telefono</label>
-                                    <input type="text" class="form-control form-control-sm input-validar" id="txTelefono" name="Telefono">
+                                    <label for="txtTelefono">Telefono</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" id="txtTelefono" name="Telefono">
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <label for="txtImpuesto">% Impuesto</label>
-                                    <input type="text" class="form-control form-control-sm input-validar" id="txtImpuesto" name="Impuesto">
+                                    <label for="txtCodigoPostal">Código Postal</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" id="txtCodigoPostal" name="Código Postal" maxlength="5">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -52,6 +51,20 @@
                                 <div class="form-group col-sm-6">
                                     <label for="txtLogo">Logo</label>
                                     <input class="form-control-file" type="file" id="txtLogo" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="cboRegimenFiscal">Régimen Fiscal</label>
+                                    <select class="form-control form-control-sm" id="cboRegimenFiscal">
+                                        <option value="601">601 - General de Ley Personas Morales</option>
+                                        <option value="603">603 - Personas Morales con Fines no Lucrativos</option>
+                                        <option value="605">605 - Sueldos y Salarios e Ingresos Asimilados a Salarios</option>
+                                        <option value="606">606 - Arrendamiento</option>
+                                        <option value="612">612 - Personas Físicas con Actividades Empresariales y Profesionales</option>
+                                        <option value="616">616 - Sin obligaciones fiscales</option>
+                                        <option value="626">626 - Régimen Simplificado de Confianza (RESICO)</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -67,9 +80,9 @@
                                     <button class="btn btn-success btn-sm" type="button" id="btnGuardarCambios">Guardar Cambios</button>
                                 </div>
                             </div>
-                                                
+
                         </div>
-    
+
                     </div>
                 </form>
             </div>
