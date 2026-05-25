@@ -33,21 +33,20 @@ namespace SistemaVenta.BLL.Implementacion
                 throw;
             }
         }
+
         public async Task<Negocio> GuardarCambios(Negocio entidad, Stream Logo = null, string NombreLogo = "")
         {
             try
             {
                 Negocio negocio_encontrado = await _repositorio.Obtener(n => n.IdNegocio == 1);
-
-
-                negocio_encontrado.NumeroDocumento = entidad.NumeroDocumento;
+                negocio_encontrado.Rfc = entidad.Rfc;
                 negocio_encontrado.Nombre = entidad.Nombre;
                 negocio_encontrado.Correo = entidad.Correo;
                 negocio_encontrado.Direccion = entidad.Direccion;
                 negocio_encontrado.Telefono = entidad.Telefono;
-                negocio_encontrado.PorcentajeImpuesto = entidad.PorcentajeImpuesto;
+                negocio_encontrado.CodigoPostal = entidad.CodigoPostal;
                 negocio_encontrado.SimboloMoneda = entidad.SimboloMoneda;
-
+                negocio_encontrado.RegimenFiscal = entidad.RegimenFiscal;
                 negocio_encontrado.NombreLogo = negocio_encontrado.NombreLogo == "" ? NombreLogo : negocio_encontrado.NombreLogo;
 
                 if (Logo != null)
@@ -63,8 +62,6 @@ namespace SistemaVenta.BLL.Implementacion
             {
                 throw;
             }
-
         }
-
     }
 }

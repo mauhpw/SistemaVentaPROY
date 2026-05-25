@@ -16,7 +16,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-3">
-                <button class="btn btn-success" data-toggle=\"modal\" data-target=\"#modalData\"><i class="fas fa-plus-circle"></i> Nuevo Producto</button>
+                <button class="btn btn-success" id="btnNuevo"><i class="fas fa-plus-circle"></i> Nuevo Producto</button>
             </div>
         </div>
         <hr />
@@ -69,19 +69,16 @@
                                     <input type="text" class="form-control form-control-sm input-validar" id="txtMarca" name="Marca">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-sm-12">
                                     <label for="txtNombre">Nombre</label>
                                     <input type="text" class="form-control form-control-sm input-validar" id="txtNombre" name="Nombre">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
                                     <label for="cboCategoria">Categoria</label>
-                                    <select class="form-control form-control-sm" id="cboCategoria">
-                                    </select>
+                                    <select class="form-control form-control-sm" id="cboCategoria"></select>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label for="cboEstado">Estado</label>
@@ -91,18 +88,20 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="form-row">
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-4">
                                     <label for="txtStock">Stock</label>
                                     <input type="number" class="form-control form-control-sm input-validar" id="txtStock" name="Stock">
                                 </div>
-                                <div class="form-group col-sm-6">
-                                    <label for="txtPrecio">Precio</label>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtPrecio">Precio Unitario</label>
                                     <input type="text" class="form-control form-control-sm input-validar" id="txtPrecio" name="Precio">
                                 </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtDescuento">Descuento %</label>
+                                    <input type="number" class="form-control form-control-sm" id="txtDescuento" name="Descuento" value="0" min="0" max="100">
+                                </div>
                             </div>
-
                             <div class="form-row border-top pt-2 mt-2">
                                 <div class="form-group col-sm-6">
                                     <label for="txtClaveSat" class="text-danger font-weight-bold">Clave Producto SAT</label>
@@ -113,23 +112,25 @@
                                     <input type="text" class="form-control form-control-sm input-validar" id="txtClaveUnidadSat" name="Unidad SAT" placeholder="Ej. H87" maxlength="3">
                                 </div>
                             </div>
-
                             <div class="form-row">
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-4">
                                     <label for="txtMedidaEmpresa">Medida Empresa</label>
-                                    <input type="text" class="form-control form-control-sm input-validar" id="txtMedidaEmpresa" name="Medida Empresa" placeholder="Ej. Pieza, Caja, Paquete">
+                                    <input type="text" class="form-control form-control-sm input-validar" id="txtMedidaEmpresa" name="Medida Empresa" placeholder="Ej. Pieza, Caja">
                                 </div>
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-4">
                                     <label for="cboObjetoImpuesto">Objeto del Impuesto</label>
                                     <select class="form-control form-control-sm" id="cboObjetoImpuesto">
                                         <option value="02">02 - Sí objeto de impuesto (IVA)</option>
                                         <option value="01">01 - No objeto de impuesto</option>
-                                        <option value="03">03 - Sí objeto de impuesto y no obligado al desglose</option>
+                                        <option value="03">03 - Sí objeto del impuesto y no obligado al desglose</option>
                                     </select>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtImpuesto">Impuesto %</label>
+                                    <input type="number" class="form-control form-control-sm" id="txtImpuesto" name="Impuesto" value="16" min="0" max="100">
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-4 text-center">
                             <div class="form-group">
                                 <label for="txtFoto">Imagen del Producto</label>

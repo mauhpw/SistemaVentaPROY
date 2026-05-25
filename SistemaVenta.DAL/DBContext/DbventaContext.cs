@@ -175,13 +175,18 @@ namespace SistemaVenta.DAL.DBContext
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("nombreLogo");
-                entity.Property(e => e.NumeroDocumento)
-                    .HasMaxLength(50)
+                entity.Property(e => e.Rfc)
+                    .HasMaxLength(13)
                     .IsUnicode(false)
-                    .HasColumnName("numeroDocumento");
-                entity.Property(e => e.PorcentajeImpuesto)
-                    .HasColumnType("decimal(10, 2)")
-                    .HasColumnName("porcentajeImpuesto");
+                    .HasColumnName("RFC");
+                entity.Property(e => e.CodigoPostal)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("CodigoPostal");
+                entity.Property(e => e.RegimenFiscal)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("RegimenFiscal");
                 entity.Property(e => e.SimboloMoneda)
                     .HasMaxLength(5)
                     .IsUnicode(false)
@@ -194,24 +199,6 @@ namespace SistemaVenta.DAL.DBContext
                     .HasMaxLength(500)
                     .IsUnicode(false)
                     .HasColumnName("urlLogo");
-            });
-
-            modelBuilder.Entity<NumeroCorrelativo>(entity =>
-            {
-                entity.HasKey(e => e.IdNumeroCorrelativo).HasName("PK__NumeroCo__25FB547ED43E53F0");
-
-                entity.ToTable("NumeroCorrelativo");
-
-                entity.Property(e => e.IdNumeroCorrelativo).HasColumnName("idNumeroCorrelativo");
-                entity.Property(e => e.CantidadDigitos).HasColumnName("cantidadDigitos");
-                entity.Property(e => e.FechaActualizacion)
-                    .HasColumnType("datetime")
-                    .HasColumnName("fechaActualizacion");
-                entity.Property(e => e.Gestion)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("gestion");
-                entity.Property(e => e.UltimoNumero).HasColumnName("ultimoNumero");
             });
 
             modelBuilder.Entity<Producto>(entity =>
@@ -246,6 +233,28 @@ namespace SistemaVenta.DAL.DBContext
                 entity.Property(e => e.Precio)
                     .HasColumnType("decimal(10, 2)")
                     .HasColumnName("precio");
+                entity.Property(e => e.Descuento)
+                    .HasColumnType("decimal(10, 2)")
+                    .HasColumnName("Descuento");
+                entity.Property(e => e.Impuesto)
+                    .HasColumnType("decimal(10, 2)")
+                    .HasColumnName("Impuesto");
+                entity.Property(e => e.ClaveSat)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("ClaveSat");
+                entity.Property(e => e.ClaveUnidadSat)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("ClaveUnidadSat");
+                entity.Property(e => e.MedidaEmpresa)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("MedidaEmpresa");
+                entity.Property(e => e.ObjetoImpuesto)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("ObjetoImpuesto");
                 entity.Property(e => e.Stock).HasColumnName("stock");
                 entity.Property(e => e.UrlImagen)
                     .HasMaxLength(500)

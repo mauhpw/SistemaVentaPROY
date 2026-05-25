@@ -1,12 +1,8 @@
-﻿
-using SistemaVenta.AplicacionWeb.Models.ViewModels;
+﻿using SistemaVenta.AplicacionWeb.Models.ViewModels;
 using SistemaVenta.Entity;
 using System.Globalization;
 using AutoMapper;
 using SistemaVenta.Entity.Models;
-using Microsoft.AspNetCore.Razor.Language.CodeGeneration;       
-using SistemaVenta.Entity.Models;
-
 
 namespace SistemaVenta.AplicacionWeb.Utilidades.Automapper
 {
@@ -38,46 +34,23 @@ namespace SistemaVenta.AplicacionWeb.Utilidades.Automapper
                 destino.IdRolNavigation,
                 opt => opt.Ignore()
                 );
-
             #endregion
-
 
             #region Negocio
-            CreateMap<Negocio, VMNegocio>()
-                .ForMember(destino =>
-                destino.PorcentajeImpuesto,
-                opt => opt.MapFrom(origen => Convert.ToString(origen.PorcentajeImpuesto.Value, new CultureInfo("Es-MEX")))
-                );
-
-            CreateMap<VMNegocio, Negocio>()
-                .ForMember(destino =>
-                destino.PorcentajeImpuesto,
-                opt => opt.MapFrom(origen => Convert.ToDecimal(origen.PorcentajeImpuesto, new CultureInfo("Es-MEX")))
-                );
-
+            CreateMap<Negocio, VMNegocio>().ReverseMap();
             #endregion
 
-
             #region Categoria
-
             CreateMap<Categoria, VMCategoria>()
-
                 .ForMember(destino =>
-
                 destino.EsActivo,
-
                 opt => opt.MapFrom(origen => origen.EsActivo == true ? 1 : 0));
 
             CreateMap<VMCategoria, Categoria>()
-
                 .ForMember(destino =>
-
                 destino.EsActivo,
-
                 opt => opt.MapFrom(origen => origen.EsActivo == 1 ? true : false));
-
             #endregion
-
 
             #region Producto
             CreateMap<Producto, VMProducto>()
@@ -100,11 +73,14 @@ namespace SistemaVenta.AplicacionWeb.Utilidades.Automapper
                 opt => opt.MapFrom(origen => origen.EsActivo == 1 ? true : false)
                 )
                 .ForMember(destino =>
+                destino.IdCategoriaNavigation,
+                opt => opt.Ignore()
+                )
+                .ForMember(destino =>
                 destino.Precio,
                 opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Precio, new CultureInfo("Es-MEX")))
                 );
             #endregion
-
 
             #region TipoDocumentoVenta
             CreateMap<TipoDocumentoVenta, VMTipoDocumentoVenta>().ReverseMap();
@@ -173,32 +149,28 @@ namespace SistemaVenta.AplicacionWeb.Utilidades.Automapper
                 );
 
             CreateMap<DetalleVenta, VMReporteVenta>()
-    .ForMember(destino => destino.FechaRegistro,
-        opt => opt.MapFrom(origen => origen.IdVentaNavigation.FechaRegistro.Value.ToString("dd/MM/yyyy")))
-    .ForMember(destino => destino.NumeroVenta,
-        opt => opt.MapFrom(origen => origen.IdVentaNavigation.NumeroVenta))
-    .ForMember(destino => destino.TipoDocumento,
-        opt => opt.MapFrom(origen => origen.IdVentaNavigation.IdTipoDocumentoVentaNavigation.Descripcion))
-    .ForMember(destino => destino.DocumentoCliente,
-        opt => opt.MapFrom(origen => origen.IdVentaNavigation.DocumentoCliente))
-    .ForMember(destino => destino.NombreCliente,
-        opt => opt.MapFrom(origen => origen.IdVentaNavigation.NombreCliente))
-    .ForMember(destino => destino.SubTotalVenta,
-        opt => opt.MapFrom(origen => Convert.ToString(origen.IdVentaNavigation.SubTotal.Value, new CultureInfo("es-MEX"))))
-    // --- CORRECCIÓN 1: Agregamos el Impuesto que faltaba ---
-    .ForMember(destino => destino.ImpuestoTotalVenta,
-        opt => opt.MapFrom(origen => Convert.ToString(origen.IdVentaNavigation.ImpuestoTotal.Value, new CultureInfo("es-MEX"))))
-
-    // --- CORRECCIÓN 2: El TotalVenta ahora apunta al TOTAL real, no al impuesto ---
-    .ForMember(destino => destino.TotalVenta,
-        opt => opt.MapFrom(origen => Convert.ToString(origen.IdVentaNavigation.Total.Value, new CultureInfo("es-MEX"))))
-
-    .ForMember(destino => destino.Producto,
-        opt => opt.MapFrom(origen => origen.DescripcionProducto))
-    .ForMember(destino => destino.Precio,
-        opt => opt.MapFrom(origen => Convert.ToString(origen.Precio.Value, new CultureInfo("es-MEX"))))
-    .ForMember(destino => destino.Total,
-        opt => opt.MapFrom(origen => Convert.ToString(origen.Total.Value, new CultureInfo("es-MEX"))));
+                .ForMember(destino => destino.FechaRegistro,
+                    opt => opt.MapFrom(origen => origen.IdVentaNavigation.FechaRegistro.Value.ToString("dd/MM/yyyy")))
+                .ForMember(destino => destino.NumeroVenta,
+                    opt => opt.MapFrom(origen => origen.IdVentaNavigation.NumeroVenta))
+                .ForMember(destino => destino.TipoDocumento,
+                    opt => opt.MapFrom(origen => origen.IdVentaNavigation.IdTipoDocumentoVentaNavigation.Descripcion))
+                .ForMember(destino => destino.DocumentoCliente,
+                    opt => opt.MapFrom(origen => origen.IdVentaNavigation.DocumentoCliente))
+                .ForMember(destino => destino.NombreCliente,
+                    opt => opt.MapFrom(origen => origen.IdVentaNavigation.NombreCliente))
+                .ForMember(destino => destino.SubTotalVenta,
+                    opt => opt.MapFrom(origen => Convert.ToString(origen.IdVentaNavigation.SubTotal.Value, new CultureInfo("es-MEX"))))
+                .ForMember(destino => destino.ImpuestoTotalVenta,
+                    opt => opt.MapFrom(origen => Convert.ToString(origen.IdVentaNavigation.ImpuestoTotal.Value, new CultureInfo("es-MEX"))))
+                .ForMember(destino => destino.TotalVenta,
+                    opt => opt.MapFrom(origen => Convert.ToString(origen.IdVentaNavigation.Total.Value, new CultureInfo("es-MEX"))))
+                .ForMember(destino => destino.Producto,
+                    opt => opt.MapFrom(origen => origen.DescripcionProducto))
+                .ForMember(destino => destino.Precio,
+                    opt => opt.MapFrom(origen => Convert.ToString(origen.Precio.Value, new CultureInfo("es-MEX"))))
+                .ForMember(destino => destino.Total,
+                    opt => opt.MapFrom(origen => Convert.ToString(origen.Total.Value, new CultureInfo("es-MEX"))));
             #endregion
 
             #region Menu
@@ -208,9 +180,6 @@ namespace SistemaVenta.AplicacionWeb.Utilidades.Automapper
                 opt => opt.MapFrom(origen => origen.InverseIdMenuPadreNavigation)
                 );
             #endregion
-
-
-
         }
     }
 }

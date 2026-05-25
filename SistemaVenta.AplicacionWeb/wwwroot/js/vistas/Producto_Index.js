@@ -2,11 +2,17 @@
     idProducto: 0,
     codigoBarra: "",
     marca: "",
-    nombre: "",
+    descripcion: "",
     idCategoria: 0,
     stock: 0,
     urlImagen: "",
     precio: 0,
+    descuento: 0,
+    impuesto: 0,
+    claveSat: "",
+    claveUnidadSat: "",
+    medidaEmpresa: "",
+    objetoImpuesto: "02",
     esActivo: 1,
 }
 
@@ -14,9 +20,7 @@ let tablaData;
 
 $(document).ready(function () {
     fetch("/Categoria/Lista")
-        .then(response => {
-            return response.ok ? response.json() : Promise.reject(response);
-        })
+        .then(response => response.ok ? response.json() : Promise.reject(response))
         .then(responseJson => {
             if (responseJson.data.length > 0) {
                 responseJson.data.forEach((item) => {
@@ -36,9 +40,7 @@ $(document).ready(function () {
             { "data": "idProducto", "visible": false, "searchable": false },
             {
                 "data": "urlImagen", render: function (data) {
-                    if (!data) {
-                        return '<img style="height:60px" src="https://via.placeholder.com/60?text=Sin+Imagen" class="rounded mx-auto d-block"/>';
-                    }
+                    if (!data) return '<img style="height:60px" src="https://via.placeholder.com/60?text=Sin+Imagen" class="rounded mx-auto d-block"/>';
                     return `<img style="height:60px" src="${data}" class="rounded mx-auto d-block"/>`;
                 }
             },
@@ -50,10 +52,8 @@ $(document).ready(function () {
             { "data": "precio" },
             {
                 "data": "esActivo", render: function (data) {
-                    if (data == 1)
-                        return '<span class="badge badge-info">Activo</span>';
-                    else
-                        return '<span class="badge badge-danger">No Activo</span>';
+                    if (data == 1) return '<span class="badge badge-info">Activo</span>';
+                    else return '<span class="badge badge-danger">No Activo</span>';
                 }
             },
             {
@@ -83,18 +83,19 @@ function mostrarModal(modelo = MODELO_BASE) {
     $("#txtId").val(modelo.idProducto)
     $("#txtCodigoBarra").val(modelo.codigoBarra)
     $("#txtMarca").val(modelo.marca)
-    $("#txtDescripcion").val(modelo.descripcion)
+    $("#txtNombre").val(modelo.descripcion)
     $("#cboCategoria").val(modelo.idCategoria == 0 ? $("#cboCategoria option:first").val() : modelo.idCategoria)
     $("#txtStock").val(modelo.stock)
     $("#txtPrecio").val(modelo.precio)
+    $("#txtDescuento").val(modelo.descuento ?? 0)
+    $("#txtImpuesto").val(modelo.impuesto ?? 16)
+    $("#txtClaveSat").val(modelo.claveSat ?? "")
+    $("#txtClaveUnidadSat").val(modelo.claveUnidadSat ?? "")
+    $("#txtMedidaEmpresa").val(modelo.medidaEmpresa ?? "")
+    $("#cboObjetoImpuesto").val(modelo.objetoImpuesto ?? "02")
     $("#cboEstado").val(modelo.esActivo)
-    $("#txtImagen").val("")
-    // Corrección: Asignar imagen por defecto si la URL está vacía
-    if (modelo.urlImagen === "") {
-        $("#imgProducto").attr("src", "https://via.placeholder.com/200?text=Sin+Imagen")
-    } else {
-        $("#imgProducto").attr("src", modelo.urlImagen)
-    }
+    $("#txtFoto").val("")
+    $("#imgProducto").attr("src", modelo.urlImagen || "https://via.placeholder.com/200?text=Sin+Imagen")
     $("#modalData").modal("show")
 }
 
@@ -117,28 +118,31 @@ $("#btnGuardar").click(function () {
     modelo["idProducto"] = parseInt($("#txtId").val())
     modelo["codigoBarra"] = $("#txtCodigoBarra").val()
     modelo["marca"] = $("#txtMarca").val()
-    modelo["descripcion"] = $("#txtDescripcion").val()
+    modelo["descripcion"] = $("#txtNombre").val()
     modelo["idCategoria"] = $("#cboCategoria").val()
     modelo["stock"] = $("#txtStock").val()
     modelo["precio"] = $("#txtPrecio").val()
+    modelo["descuento"] = $("#txtDescuento").val()
+    modelo["impuesto"] = $("#txtImpuesto").val()
+    modelo["claveSat"] = $("#txtClaveSat").val()
+    modelo["claveUnidadSat"] = $("#txtClaveUnidadSat").val()
+    modelo["medidaEmpresa"] = $("#txtMedidaEmpresa").val()
+    modelo["objetoImpuesto"] = $("#cboObjetoImpuesto").val()
     modelo["esActivo"] = $("#cboEstado").val()
 
-    const inputFoto = document.getElementById("txtImagen")
+    const inputFoto = document.getElementById("txtFoto")
     const formData = new FormData();
 
-    // Corrección: Solo agregar la imagen al FormData si el usuario seleccionó un archivo
-    if (inputFoto.files[0]) {
+    if (inputFoto && inputFoto.files && inputFoto.files[0]) {
         formData.append("imagen", inputFoto.files[0])
     }
+
     formData.append("modelo", JSON.stringify(modelo))
 
     $("#modalData").find("div.modal-content").LoadingOverlay("show");
 
     if (modelo.idProducto == 0) {
-        fetch("/Producto/Crear", {
-            method: "POST",
-            body: formData
-        })
+        fetch("/Producto/Crear", { method: "POST", body: formData })
             .then(response => {
                 $("#modalData").find("div.modal-content").LoadingOverlay("hide");
                 return response.ok ? response.json() : Promise.reject(response);
@@ -153,10 +157,7 @@ $("#btnGuardar").click(function () {
                 }
             })
     } else {
-        fetch("/Producto/Editar", {
-            method: "PUT",
-            body: formData
-        })
+        fetch("/Producto/Editar", { method: "PUT", body: formData })
             .then(response => {
                 $("#modalData").find("div.modal-content").LoadingOverlay("hide");
                 return response.ok ? response.json() : Promise.reject(response);
@@ -183,7 +184,6 @@ $("#tbdata tbody").on("click", ".btn-editar", function () {
         filaSeleccionada = $(this).closest("tr");
     }
     const data = tablaData.row(filaSeleccionada).data();
-
     mostrarModal(data);
 })
 
@@ -210,7 +210,6 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
         function (respuesta) {
             if (respuesta) {
                 $(".showSweetAlert").LoadingOverlay("show");
-
                 fetch(`/Producto/Eliminar?IdProducto=${data.idProducto}`, { method: "DELETE" })
                     .then(response => {
                         $(".showSweetAlert").LoadingOverlay("hide");

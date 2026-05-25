@@ -86,12 +86,16 @@ namespace SistemaVenta.BLL.Implementacion
                 producto_para_editar.IdCategoria = entidad.IdCategoria;
                 producto_para_editar.Stock = entidad.Stock;
                 producto_para_editar.Precio = entidad.Precio;
+                producto_para_editar.Descuento = entidad.Descuento;
+                producto_para_editar.Impuesto = entidad.Impuesto;
+                producto_para_editar.ClaveSat = entidad.ClaveSat;
+                producto_para_editar.ClaveUnidadSat = entidad.ClaveUnidadSat;
+                producto_para_editar.MedidaEmpresa = entidad.MedidaEmpresa;
+                producto_para_editar.ObjetoImpuesto = entidad.ObjetoImpuesto;
                 producto_para_editar.EsActivo = entidad.EsActivo;
 
                 if (producto_para_editar.NombreImagen == "")
-                {
                     producto_para_editar.NombreImagen = NombreImagen;
-                }
 
                 if (imagen != null)
                 {
@@ -104,11 +108,8 @@ namespace SistemaVenta.BLL.Implementacion
                 if (!respuesta)
                     throw new TaskCanceledException("No se pudo editar el producto");
 
-
                 Producto producto_editado = queryProducto.Include(c => c.IdCategoriaNavigation).First();
-
                 return producto_editado;
-
             }
             catch
             {
