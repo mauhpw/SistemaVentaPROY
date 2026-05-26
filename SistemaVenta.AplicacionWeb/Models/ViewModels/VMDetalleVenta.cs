@@ -1,14 +1,12 @@
-﻿using SistemaVenta.Entity.Models;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace SistemaVenta.AplicacionWeb.Models.ViewModels
 {
     public class VMDetalleVenta
     {
-
         public int? IdProducto { get; set; }
 
-        public string? MarcaProdutcto { get; set; }
+        public string? MarcaProducto { get; set; }
 
         public string? DescripcionProducto { get; set; }
 
@@ -19,6 +17,7 @@ namespace SistemaVenta.AplicacionWeb.Models.ViewModels
         public string? Precio { get; set; }
 
         public string? Total { get; set; }
+
         [JsonIgnore]
         public VMVenta IdVentaNavigation { get; internal set; }
     }

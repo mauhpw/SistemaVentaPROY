@@ -38,7 +38,6 @@
                 </button>
             </div>
         </div>
-
         <hr />
         <div class="row">
             <div class="col-sm-12">
@@ -54,8 +53,7 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -77,43 +75,43 @@
                         <div class="col-sm-12">
                             <div class="form-row">
                                 <div class="form-group col-sm-4">
-                                    <label for="txtFechaRegistro">Fecha Registro</label>
+                                    <label>Fecha Registro</label>
                                     <input type="text" class="form-control form-control-sm bg-light" id="txtFechaRegistro" readonly>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="txtNumVenta">Numero Venta</label>
+                                    <label>Numero Venta</label>
                                     <input type="text" class="form-control form-control-sm bg-light" id="txtNumVenta" readonly>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="txtUsuarioRegistro">Usuario Registro</label>
+                                    <label>Usuario Registro</label>
                                     <input type="text" class="form-control form-control-sm bg-light" id="txtUsuarioRegistro" readonly>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-sm-4">
-                                    <label for="txtTipoDocumento">Tipo Documento</label>
+                                    <label>Tipo Documento</label>
                                     <input type="text" class="form-control form-control-sm bg-light" id="txtTipoDocumento" readonly>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="txtDocumentoCliente">RFC Cliente</label>
+                                    <label>RFC Cliente</label>
                                     <input type="text" class="form-control form-control-sm bg-light" id="txtDocumentoCliente" readonly>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="txtNombreCliente">Nombre Cliente</label>
+                                    <label>Nombre Cliente</label>
                                     <input type="text" class="form-control form-control-sm bg-light" id="txtNombreCliente" readonly>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-sm-4">
-                                    <label for="txtSubTotal">Sub Total</label>
+                                    <label>Sub Total</label>
                                     <input type="text" class="form-control form-control-sm bg-light" id="txtSubTotal" readonly>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="txtIGV">IVA</label>
+                                    <label>IVA</label>
                                     <input type="text" class="form-control form-control-sm bg-light" id="txtIGV" readonly>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="txtTotal">Total</label>
+                                    <label>Total</label>
                                     <input type="text" class="form-control form-control-sm bg-light font-weight-bold" id="txtTotal" readonly>
                                 </div>
                             </div>
@@ -128,8 +126,7 @@
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                        </tbody>
+                                        <tbody></tbody>
                                     </table>
                                 </div>
                             </div>
@@ -159,46 +156,43 @@
             </div>
             <div class="modal-body">
                 <form id="formFacturacion">
+                    <input type="hidden" id="txtNumVentaFactura" />
                     <div class="form-group">
-                        <label for="cboTipoComprobante">Tipo de Comprobante</label>
+                        <label>Tipo de Comprobante</label>
                         <select class="form-control form-control-sm" id="cboTipoComprobante">
-                            <option value="I">I - Ingreso (Factura de Venta)</option>
-                            <option value="E">E - Egreso (Nota de Crédito)</option>
+                            <option value="1">I - Ingreso (Factura de Venta)</option>
+                            <option value="2">E - Egreso (Nota de Crédito)</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="cboUsoCFDI">Uso del CFDI</label>
+                        <label>Uso del CFDI</label>
                         <select class="form-control form-control-sm" id="cboUsoCFDI">
-                            <option value="G01">G01 - Adquisición de mercancías</option>
-                            <option value="G03">G03 - Gastos en general</option>
-                            <option value="P01">P01 - Por definir</option>
-                            <option value="D01">D01 - Honorarios médicos, dentales y gastos hospitalarios</option>
-                            <option value="S01">S01 - Sin efectos fiscales</option>
+                            <option value="1">G01 - Adquisición de mercancías</option>
+                            <option value="3">G03 - Gastos en general</option>
+                            <option value="5">S01 - Sin efectos fiscales</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="cboRegimenFiscalReceptor">Régimen Fiscal (Receptor)</label>
+                        <label>Régimen Fiscal (Receptor)</label>
                         <select class="form-control form-control-sm" id="cboRegimenFiscalReceptor">
-                            <option value="601">601 - General de Ley Personas Morales</option>
-                            <option value="612">612 - Personas Físicas con Actividades Empresariales</option>
-                            <option value="626">626 - Régimen Simplificado de Confianza (RESICO)</option>
-                            <option value="616">616 - Sin obligaciones fiscales</option>
+                            <option value="1">601 - General de Ley Personas Morales</option>
+                            <option value="2">612 - Personas Físicas con Actividades Empresariales</option>
+                            <option value="3">626 - Régimen Simplificado de Confianza (RESICO)</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="cboFormaPago">Forma de Pago</label>
+                        <label>Forma de Pago</label>
                         <select class="form-control form-control-sm" id="cboFormaPago">
-                            <option value="01">01 - Efectivo</option>
-                            <option value="03">03 - Transferencia electrónica de fondos</option>
-                            <option value="04">04 - Tarjeta de crédito</option>
-                            <option value="28">28 - Tarjeta de débito</option>
+                            <option value="1">01 - Efectivo</option>
+                            <option value="3">03 - Transferencia electrónica de fondos</option>
+                            <option value="4">04 - Tarjeta de crédito</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="cboMetodoPago">Método de Pago</label>
+                        <label>Método de Pago</label>
                         <select class="form-control form-control-sm" id="cboMetodoPago">
-                            <option value="PUE">PUE - Pago en una sola exhibición</option>
-                            <option value="PPD">PPD - Pago en parcialidades o diferido</option>
+                            <option value="1">PUE - Pago en una sola exhibición</option>
+                            <option value="2">PPD - Pago en parcialidades o diferido</option>
                         </select>
                     </div>
                 </form>
@@ -218,16 +212,14 @@
 
     <script>
         $(document).ready(function () {
-            // Cuando se presiona "Solicitar Factura" dentro del detalle
-            $("#btnSolicitarFactura").click(function () {
-                // Cerramos el modal de detalles y abrimos el formulario fiscal
-                $("#modalData").modal("hide");
-
-                // Pequeño delay para evitar conflictos visuales entre modales de Bootstrap
-                setTimeout(function () {
-                    $("#modalFactura").modal("show");
-                }, 400);
-            });
+        $("#btnSolicitarFactura").click(function () {
+        const numeroVenta = $("#txtNumVenta").val();
+        $("#txtNumVentaFactura").val(numeroVenta);
+        $("#modalData").modal("hide");
+        setTimeout(function () {
+        $("#modalFactura").modal("show");
+        }, 400);
+        });
         });
     </script>
 }

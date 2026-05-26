@@ -92,28 +92,27 @@
                     <div class="card-body">
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupTipoDocumento">Tipo Comprobante</span>
+                                <span class="input-group-text">Tipo Comprobante</span>
                             </div>
-                            <select class="form-control" id="cboTipoDocumentoVenta">
-                            </select>
+                            <select class="form-control" id="cboTipoDocumentoVenta"></select>
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupSubTotal">Sub Total</span>
                             </div>
-                            <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupSubTotal" id="txtSubTotal" disabled>
+                            <input type="text" class="form-control text-right" id="txtSubTotal" disabled>
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupIGV">IVA</span>
+                                <span class="input-group-text" id="inputGroupIGV">IVA(16%)</span>
                             </div>
-                            <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupIGV" id="txtIGV" disabled>
+                            <input type="text" class="form-control text-right" id="txtIGV" disabled>
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupTotal">Total</span>
                             </div>
-                            <input type="text" class="form-control text-right font-weight-bold" aria-label="Small" aria-describedby="inputGroupTotal" id="txtTotal" disabled>
+                            <input type="text" class="form-control text-right font-weight-bold" id="txtTotal" disabled>
                         </div>
                     </div>
                 </div>
@@ -167,6 +166,5 @@
     <script src="~/vendor/select2/es.min.js"></script>
     <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
     <script src="~/js/vistas/Nueva_Venta.js"></script>
 }

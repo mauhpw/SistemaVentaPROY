@@ -5,7 +5,6 @@ using SistemaVenta.Entity.Models;
 
 namespace SistemaVenta.DAL.DBContext
 {
-
     public partial class DbventaContext : DbContext
     {
         public DbventaContext()
@@ -18,39 +17,27 @@ namespace SistemaVenta.DAL.DBContext
         }
 
         public virtual DbSet<Categoria> Categoria { get; set; }
-
         public virtual DbSet<Configuracion> Configuracions { get; set; }
-
         public virtual DbSet<DetalleVenta> DetalleVenta { get; set; }
-
         public virtual DbSet<Menu> Menus { get; set; }
-
         public virtual DbSet<Negocio> Negocios { get; set; }
-
         public virtual DbSet<NumeroCorrelativo> NumeroCorrelativos { get; set; }
-
         public virtual DbSet<Producto> Productos { get; set; }
-
         public virtual DbSet<Rol> Rols { get; set; }
-
         public virtual DbSet<RolMenu> RolMenus { get; set; }
-
         public virtual DbSet<TipoDocumentoVenta> TipoDocumentoVenta { get; set; }
-
         public virtual DbSet<Usuario> Usuarios { get; set; }
-
         public virtual DbSet<Venta> Venta { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Categoria>(entity =>
             {
                 entity.HasKey(e => e.IdCategoria).HasName("PK__Categori__8A3D240C8C14B43D");
-
                 entity.Property(e => e.IdCategoria).HasColumnName("idCategoria");
                 entity.Property(e => e.Descripcion)
                     .HasMaxLength(50)
@@ -65,10 +52,7 @@ namespace SistemaVenta.DAL.DBContext
 
             modelBuilder.Entity<Configuracion>(entity =>
             {
-                entity
-                    .HasNoKey()
-                    .ToTable("Configuracion");
-
+                entity.HasNoKey().ToTable("Configuracion");
                 entity.Property(e => e.Propiedad)
                     .HasMaxLength(50)
                     .IsUnicode(false)
@@ -86,7 +70,6 @@ namespace SistemaVenta.DAL.DBContext
             modelBuilder.Entity<DetalleVenta>(entity =>
             {
                 entity.HasKey(e => e.IdDetalleVenta).HasName("PK__DetalleV__BFE2843F8EB9C1C1");
-
                 entity.Property(e => e.IdDetalleVenta).HasColumnName("idDetalleVenta");
                 entity.Property(e => e.Cantidad).HasColumnName("cantidad");
                 entity.Property(e => e.CategoriaProducto)
@@ -97,19 +80,18 @@ namespace SistemaVenta.DAL.DBContext
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("descripcionProducto");
-                entity.Property(e => e.IdProducto).HasColumnName("idProducvto");
+                entity.Property(e => e.IdProducto).HasColumnName("idProducto");
                 entity.Property(e => e.IdVenta).HasColumnName("idVenta");
-                entity.Property(e => e.MarcaProdutcto)
+                entity.Property(e => e.MarcaProducto)
                     .HasMaxLength(100)
                     .IsUnicode(false)
-                    .HasColumnName("marcaProdutcto");
+                    .HasColumnName("marcaProducto");
                 entity.Property(e => e.Precio)
                     .HasColumnType("decimal(10, 2)")
                     .HasColumnName("precio");
                 entity.Property(e => e.Total)
                     .HasColumnType("decimal(10, 2)")
                     .HasColumnName("total");
-
                 entity.HasOne(d => d.IdVentaNavigation).WithMany(p => p.DetalleVenta)
                     .HasForeignKey(d => d.IdVenta)
                     .HasConstraintName("FK__DetalleVe__idVen__00200768");
@@ -118,9 +100,7 @@ namespace SistemaVenta.DAL.DBContext
             modelBuilder.Entity<Menu>(entity =>
             {
                 entity.HasKey(e => e.IdMenu).HasName("PK__Menu__C26AF483A72A3FEE");
-
                 entity.ToTable("Menu");
-
                 entity.Property(e => e.IdMenu).HasColumnName("idMenu");
                 entity.Property(e => e.Controlador)
                     .HasMaxLength(30)
@@ -144,7 +124,6 @@ namespace SistemaVenta.DAL.DBContext
                     .HasMaxLength(30)
                     .IsUnicode(false)
                     .HasColumnName("paginaAccion");
-
                 entity.HasOne(d => d.IdMenuPadreNavigation).WithMany(p => p.InverseIdMenuPadreNavigation)
                     .HasForeignKey(d => d.IdMenuPadre)
                     .HasConstraintName("FK__Menu__idMenuPadr__5CD6CB2B");
@@ -153,9 +132,7 @@ namespace SistemaVenta.DAL.DBContext
             modelBuilder.Entity<Negocio>(entity =>
             {
                 entity.HasKey(e => e.IdNegocio).HasName("PK__Negocio__70E1E10739D885E6");
-
                 entity.ToTable("Negocio");
-
                 entity.Property(e => e.IdNegocio)
                     .ValueGeneratedNever()
                     .HasColumnName("idNegocio");
@@ -201,12 +178,26 @@ namespace SistemaVenta.DAL.DBContext
                     .HasColumnName("urlLogo");
             });
 
+            modelBuilder.Entity<NumeroCorrelativo>(entity =>
+            {
+                entity.HasKey(e => e.IdNumeroCorrelativo).HasName("PK__NumeroCo__25FB547ED43E53F0");
+                entity.ToTable("NumeroCorrelativo");
+                entity.Property(e => e.IdNumeroCorrelativo).HasColumnName("idNumeroCorrelativo");
+                entity.Property(e => e.CantidadDigitos).HasColumnName("cantidadDigitos");
+                entity.Property(e => e.FechaActualizacion)
+                    .HasColumnType("datetime")
+                    .HasColumnName("fechaActualizacion");
+                entity.Property(e => e.Gestion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("gestion");
+                entity.Property(e => e.UltimoNumero).HasColumnName("ultimoNumero");
+            });
+
             modelBuilder.Entity<Producto>(entity =>
             {
                 entity.HasKey(e => e.IdProducto).HasName("PK__Producto__07F4A132A614B02B");
-
                 entity.ToTable("Producto");
-
                 entity.Property(e => e.IdProducto).HasColumnName("idProducto");
                 entity.Property(e => e.CodigoBarra)
                     .HasMaxLength(50)
@@ -260,7 +251,6 @@ namespace SistemaVenta.DAL.DBContext
                     .HasMaxLength(500)
                     .IsUnicode(false)
                     .HasColumnName("urlImagen");
-
                 entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Productos)
                     .HasForeignKey(d => d.IdCategoria)
                     .HasConstraintName("FK__Producto__idCate__72C60C4A");
@@ -269,9 +259,7 @@ namespace SistemaVenta.DAL.DBContext
             modelBuilder.Entity<Rol>(entity =>
             {
                 entity.HasKey(e => e.IdRol).HasName("PK__Rol__3C872F762A0DAA76");
-
                 entity.ToTable("Rol");
-
                 entity.Property(e => e.IdRol).HasColumnName("idRol");
                 entity.Property(e => e.Descripcion)
                     .HasMaxLength(30)
@@ -287,9 +275,7 @@ namespace SistemaVenta.DAL.DBContext
             modelBuilder.Entity<RolMenu>(entity =>
             {
                 entity.HasKey(e => e.IdRolMenu).HasName("PK__RolMenu__CD2045D8997F73DD");
-
                 entity.ToTable("RolMenu");
-
                 entity.Property(e => e.IdRolMenu).HasColumnName("idRolMenu");
                 entity.Property(e => e.EsActivo).HasColumnName("esActivo");
                 entity.Property(e => e.FechaRegistro)
@@ -298,11 +284,9 @@ namespace SistemaVenta.DAL.DBContext
                     .HasColumnName("fechaRegistro");
                 entity.Property(e => e.IdMenu).HasColumnName("idMenu");
                 entity.Property(e => e.IdRol).HasColumnName("idRol");
-
                 entity.HasOne(d => d.IdMenuNavigation).WithMany(p => p.RolMenus)
                     .HasForeignKey(d => d.IdMenu)
                     .HasConstraintName("FK__RolMenu__idMenu__6754599E");
-
                 entity.HasOne(d => d.IdRolNavigation).WithMany(p => p.RolMenus)
                     .HasForeignKey(d => d.IdRol)
                     .HasConstraintName("FK__RolMenu__idRol__66603565");
@@ -311,7 +295,6 @@ namespace SistemaVenta.DAL.DBContext
             modelBuilder.Entity<TipoDocumentoVenta>(entity =>
             {
                 entity.HasKey(e => e.IdTipoDocumentoVenta).HasName("PK__TipoDocu__A9D59AEEE57AA1A3");
-
                 entity.Property(e => e.IdTipoDocumentoVenta).HasColumnName("idTipoDocumentoVenta");
                 entity.Property(e => e.Descripcion)
                     .HasMaxLength(50)
@@ -327,9 +310,7 @@ namespace SistemaVenta.DAL.DBContext
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__645723A6DEB1E2B4");
-
                 entity.ToTable("Usuario");
-
                 entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
                 entity.Property(e => e.Clave)
                     .HasMaxLength(100)
@@ -357,7 +338,6 @@ namespace SistemaVenta.DAL.DBContext
                     .HasMaxLength(500)
                     .IsUnicode(false)
                     .HasColumnName("urlFoto");
-
                 entity.HasOne(d => d.IdRolNavigation).WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdRol)
                     .HasConstraintName("FK__Usuario__idRol__6B24EA82");
@@ -366,7 +346,6 @@ namespace SistemaVenta.DAL.DBContext
             modelBuilder.Entity<Venta>(entity =>
             {
                 entity.HasKey(e => e.IdVenta).HasName("PK__Venta__077D561430BF43B3");
-
                 entity.Property(e => e.IdVenta).HasColumnName("idVenta");
                 entity.Property(e => e.DocumentoCliente)
                     .HasMaxLength(10)
@@ -392,12 +371,39 @@ namespace SistemaVenta.DAL.DBContext
                 entity.Property(e => e.SubTotal)
                     .HasColumnType("decimal(10, 2)")
                     .HasColumnName("subTotal");
-                entity.Property(e => e.Total).HasColumnType("decimal(10, 2)");
-
+                entity.Property(e => e.Total)
+                    .HasColumnType("decimal(10, 2)")
+                    .HasColumnName("Total");
+                entity.Property(e => e.Uuid)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("uuid");
+                entity.Property(e => e.IdUsoCFDI)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("idUsoCFDI");
+                entity.Property(e => e.IdRegimenFiscal)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("idRegimenFiscal");
+                entity.Property(e => e.IdFormaPago)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("idFormaPago");
+                entity.Property(e => e.IdMetodoPago)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("idMetodoPago");
+                entity.Property(e => e.IdTipoDeComprobante)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("idTipoDeComprobante");
+                entity.Property(e => e.FechaTimbrado)
+                    .HasColumnType("datetime")
+                    .HasColumnName("fechaTimbrado");
                 entity.HasOne(d => d.IdTipoDocumentoVentaNavigation).WithMany(p => p.Venta)
                     .HasForeignKey(d => d.IdTipoDocumentoVenta)
                     .HasConstraintName("FK__Venta__idTipoDoc__7B5B524B");
-
                 entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Venta)
                     .HasForeignKey(d => d.IdUsuario)
                     .HasConstraintName("FK__Venta__idUsuario__7C4F7684");
